@@ -1,0 +1,29 @@
+#!/bin/bash
+
+numargs=$#
+filelist=
+copylist=
+
+#process the arguments, storing all but the last in filelist
+
+while [ "$#" -gt 1 ]; do 
+	filelist=$($filelist $1)
+	shift
+done
+
+to="$1"
+
+#If less than two arguments, or if more than two args and last arg is not a directory, then issue an error message
+
+if [ "$numargs" -lt 2 -o "$numargs" -gt 2 -a ! -d "$to" ]; then
+	echo "Usage: mycp file1 file2"
+	echo "       mycp file(s) dir"
+	exit 1
+fi
+
+#sequence through each file inn filelist
+
+for form in $filelist; do
+	#see if destination file is a directory
+	if [ -d "$to" ]; then
+		tofile="$to/$(basename $from)"

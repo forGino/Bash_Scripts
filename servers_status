@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#status=$(docker ps | grep openvpn)
+#if docker ps | grep deluge > /dev/null
+
+declare -a arr=("deluge" "openfire" "shadowsocks" "sftp")
+
+for container in ${arr[@]}; do
+
+	state=$(docker inspect --format "{{.State.Running}}" $container 2>&1)
+	error="$(docker inspect --format "{{.State.Running}}" $container 2>&1 /dev/null)"
+	if "$state" = "true"
+
+	then
+		container="$(tr '[:lower:]' '[:upper:]' <<< ${container:0:1})${container:1}"
+		echo -e "\e[93m -> $container server is running! \e[0m" 
+	else
+
+		container="$(echo ${container:0:1} | tr '[:lower:]' '[:upper:]')${container:1}"
+		echo -e "\e[31m -> $container server is down! \e[0m"
+	fi 2> /dev/null
+done
+
+echo $error

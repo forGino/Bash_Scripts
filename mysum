@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ "$#" -lt 2 ]; then 
+	echo "Usage: mysum num1 num2 ..."
+	exit
+fi
+
+sum=0
+while [ "$#" -ne 0 ]; do
+
+	#sum=$(($sum+$1))
+	let sum=sum+$1
+	shift
+done
+
+echo The total is: $sum
+

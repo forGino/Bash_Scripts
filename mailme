@@ -1,0 +1,8 @@
+#!/bin/bash
+status=$(docker ps | grep openvpn > /dev/null)
+until [ -ne "$status" ]
+do
+	sleep 300
+done
+
+echo "Your VPN server is down" | mail -s "VPN server status" giovajino@gmail.com

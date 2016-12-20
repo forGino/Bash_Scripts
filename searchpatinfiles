@@ -1,0 +1,13 @@
+#!/bin/bash
+
+
+echo -n "Please enter pattern to search: "
+read pat
+
+for f in *; do
+#	if grep $pat $f > /dev/null; then
+#		echo "The file, $f contain the pattern, $pat"
+#fi
+
+	grep $pat $f > /dev/null && echo "The file, $f contain the pattern, $pat" 
+done

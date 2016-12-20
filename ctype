@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]
+then
+	echo "Usage: ctype char"
+	exit 1
+fi
+
+char=$1
+
+case $char
+in
+	[0-9]	) echo digit;;
+	[a-z]	) echo lowercase letter;;
+	[A-Z]	) echo uppercase letter;;
+	?	) echo special character;;
+	*	) echo Please type a single character;;
+esac
+

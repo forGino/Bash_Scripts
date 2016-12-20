@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#Copy a file
+
+if [ "$#" -ne 2 ]; then
+	echo "Usage: cpcat from to"
+	exit 1
+fi
+
+from="$1"
+to="$2"
+
+if [ -e "$to" ]; then
+	echo -n "$to already exists; overwrite (yes/no)? "
+	read answer
+
+	if [ "$answer" != yes ]; then
+		echo "Copy not performed"
+		exit 0
+	fi
+fi
+
+#Proceed with the copy
+cp $from $to
+
+
+

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+
+OVPN_DATA="ovpn-data"
+
+echo
+echo -e "\e[36m ###### PRINT DOCKER INFO ###### \e[0m"
+docker info
+echo
+echo
+
+echo -e "\e[93m ##### ACTIVE CONTAINERS ##### \e[0m"
+docker ps
+echo
+echo -e "\e[36m #### ALL CONTAINERS ##### \e[0m"
+docker ps -a
+echo
+echo
+echo -e "\e[35m ##### LATEST CONTAINER CREATED ##### \e[0m"
+docker ps -l
+echo "MY IMAGES"
+docker images
+
+echo
+echo
+echo -e "\e[93m ##### START OPENVPN SERVER ##### \e[0m"
+#docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn
+

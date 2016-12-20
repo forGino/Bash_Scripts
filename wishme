@@ -1,0 +1,20 @@
+#!/bin/bash
+
+h=$(date +%T | cut -d ":" -f 1)
+day="$(echo $(date +%A) | tr '[a-z]' '[A-Z]')"
+t="$(date +%T)"
+
+if [ $h -lt 6 ]; then
+	echo "It is $day morning there (between 1am and 6am) Time: $t."
+else
+	if [ $h -lt 12 ]; then
+		echo "It is $day morning there. Time: $t"
+	else
+		if [ $h -lt 18 ]; then
+			echo "It is $day afternoon there. Time: $t"
+		else
+			echo "It is $day evening there. Time: $t"
+		fi
+	fi
+fi
+

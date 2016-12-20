@@ -1,0 +1,39 @@
+#!/bin/bash
+
+echo -e "\e[93m ##### Start Update ##### \e[0m"
+apt update
+sleep 2
+echo
+echo -e "\e[93m ##### List Upgradable ##### \e[0m"
+apt list --upgradable
+count=$(apt list --upgradable | wc -l) #count the list lines
+echo $count
+if [ $count -ge 1 ]; then	#If the line number >= 2
+	display=$(echo -e "\e[93m Do you want to upgrade? y/n :  \e[0m")
+	#read -n 3 -p " ##### Do you want to upgrade? y/n: " answer	#prompt
+	read -n 3 -p "$display" answer	#prompt
+
+	case $answer
+	in
+		y|Y|yes|YES	) apt upgrade -y
+				  case $? in
+					0)	echo -e "\e[93m Update successful !\e[0m";;
+					*)	echo -e "\e[35m Update failed !\e[0m";;	
+				  esac;;
+		n|N|no|NO	) exit 0;;
+		*		) echo Wrong answer. Bye Bye ~~~
+				  exit 1;;
+	esac
+fi
+
+
+#	echo
+#	if [ -n "$answer"  -a  "$answer" = y  -o  "$answer" = Y  ]; then	#if answer notnull ans answer=yes
+#		apt upgrade -y
+#	elif [ -n "$answer"  -a  "$answer" = n  -o "$answer" = N ]; then	#if answer nonnull ans answer=no
+#		exit
+#	elif [ -z "$answer"  -o  $? -ne 0 ]; then	#if answer null or last executed command didn't finidh with exit=0
+#		echo "Bye Bye ~~~~"
+#		exit 1
+#	fi
+
